@@ -10,18 +10,9 @@ const {
     GraphQLSchema,
     GraphQLID,
     GraphQLInt,
-    GraphQLList
+    GraphQLList,
+    GraphQLNonNull,
     } = graphql;
-
-// dummy data
-// const animes = [
-//     {name: 'Doctor Stone', genre: 'Sci-Fi', id: '1', studioId: '1'},
-//     {name: 'My Hero Academia', genre: 'Action', id: '2', studioId: '2'},
-//     {name: 'Tokyo Ghoul', genre: 'Mystery', id: '3', studioId: '3'},
-//     {name: 'Fruits Basket', genre: 'Slice of Life', id: '4', studioId: '1'},
-//     {name: 'Boruto', genre:'Action', id: '5', studioID: '3'},
-//     {name: 'Carole & Tuesday', genre: 'Drama', id: '6', studioId: '2'},
-// ];
 
 //define first object type which contain different fields
 const AnimeType = new GraphQLObjectType({
@@ -37,6 +28,7 @@ const AnimeType = new GraphQLObjectType({
            resolve(parent, args){
                console.log(parent);
                // return _.find(studios, {id: parent.studioId});
+               return Studio.findById(parent.studioId);
            }
        }
    })
@@ -52,6 +44,7 @@ const StudioType = new GraphQLObjectType({
             type: new GraphQLList(AnimeType),
             resolve(parent, args){
                 // return _.filter(animes,{studioId: parent.id})
+                return Anime.find({studioId: parent.id});
             }
         }
     })
@@ -67,6 +60,7 @@ const RootQuery = new GraphQLObjectType({
            resolve(parent,args){
                //code to get data from db/other source
                //  return _.find(animes, {id: args.id});
+               return Anime.findbyId(args.id);
            }
        },
        studio:{
@@ -74,6 +68,7 @@ const RootQuery = new GraphQLObjectType({
            args: {id: {type: GraphQLID}},
             resolve(parent, args){
                // return _.find(studios, {id: args.id})
+                return Studio.findbyId(args.id);
            }
        },
        // lists all animes or studios
@@ -81,12 +76,14 @@ const RootQuery = new GraphQLObjectType({
            type: new GraphQLList(AnimeType),
            resolve(parent,args){
                // return animes
+               return Anime.find({});
            }
        },
        studios: {
            type: new GraphQLList(StudioType),
            resolve(parent,args){
                // return studios
+               return Studio.find({});
            }
        }
    }
@@ -98,8 +95,8 @@ const Mutation = new GraphQLObjectType({
         addStudio:{
             type: StudioType,
             args: {
-                name: {type: GraphQLString},
-                year: {type: GraphQLInt}
+                name: {type: new GraphQLNonNull(GraphQLString)},
+                year: {type: new GraphQLNonNull(GraphQLInt)}
             },
             resolve(parent, args){
                 let studio = new Studio({
@@ -112,9 +109,9 @@ const Mutation = new GraphQLObjectType({
         addAnime: {
             type: AnimeType,
             args: {
-                name: {type: GraphQLString},
-                genre: {type: GraphQLString},
-                studioId: {type: GraphQLID}
+                name: {type: new GraphQLNonNull(GraphQLString)},
+                genre: {type: new GraphQLNonNull(GraphQLString)},
+                studioId: {type: new GraphQLNonNull(GraphQLID)}
             },
             resolve(parent, args){
                 let anime = new Anime({
