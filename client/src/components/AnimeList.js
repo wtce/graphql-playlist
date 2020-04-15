@@ -6,19 +6,29 @@ const getAnimesQuery = gql`
     {
         animes{
             name
+            genre
             id
         }    
     }
 `;
 
 function AnimeList(props) {
-    console.log(props);
+    const displayAnimes = () => {
+        const data = props.data;
+        if(data.loading){
+            return(<div>Loading animes...</div>)
+        }else {
+            return data.animes.map(anime => {
+                return (
+                    <li>{anime.name}</li>
+                )
+            })
+        }
+    };
     return (
         <div>
             <ul id="anime-list">
-                <li>
-                    <li>Anime Name</li>
-                </li>
+                {displayAnimes()}
             </ul>
         </div>
     );
