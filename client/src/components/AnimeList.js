@@ -1,6 +1,18 @@
 import React from 'react';
+import { gql } from 'apollo-boost';
+import { graphql } from 'react-apollo';
 
-function AnimeList() {
+const getAnimesQuery = gql`
+    {
+        animes{
+            name
+            id
+        }    
+    }
+`;
+
+function AnimeList(props) {
+    console.log(props);
     return (
         <div>
             <ul id="anime-list">
@@ -12,4 +24,4 @@ function AnimeList() {
     );
 }
 
-export default AnimeList;
+export default graphql(getAnimesQuery)(AnimeList);

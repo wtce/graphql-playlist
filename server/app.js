@@ -3,8 +3,12 @@ const express = require('express');
 const graphqlHTTP = require('express-graphql');
 const schema = require('./schema/schema');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const app = express();
+
+//allow cross-origin requests
+app.use(cors());
 
 // connect to MongoDB Atlas db
 mongoose.connect('mongodb+srv://edoan:test123@graphql-uh5bg.gcp.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
