@@ -1,4 +1,4 @@
-import { gql } from 'apollo-boost';
+import {gql} from 'apollo-boost';
 
 const getAnimesQuery = gql`
     {
@@ -18,4 +18,31 @@ const getStudiosQuery = gql`
     }
 `;
 
-export { getStudiosQuery, getAnimesQuery};
+const addAnimeMutation = gql`
+    mutation($name: String!, $genre:String!, $studioId: ID!){
+        addAnime(name:$name, genre:$genre, studioId:$studioId){
+        name
+        id
+        }
+    }
+`;
+
+const getAnimeQuery = gql`
+    query($id: ID) {
+        anime(id: $id) {
+            id
+            name
+            genre
+            studio {
+                id
+                name
+                year
+                animes {
+                    name
+                    id
+                }
+            }
+        }
+    }
+`;
+export {getStudiosQuery, getAnimesQuery, addAnimeMutation,getAnimeQuery};

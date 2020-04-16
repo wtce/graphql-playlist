@@ -1,11 +1,17 @@
 import React from 'react';
-import {graphql} from 'react-apollo';
-import {getStudiosQuery} from "../queries/queries";
+import {graphql, compose} from 'react-apollo';
+import {getStudiosQuery, addAnimeMutation, getAnimesQuery} from "../queries/queries";
 
 
 function AddAnime(props) {
+    const [formData, setFormData] = React.useState({
+        name:'',
+        genre:'',
+        studioId:''
+    });
+
     const displayStudios = () => {
-        const data = props.data;
+        const data = props.getStudiosQuery;
         if(data.loading){
             return(<option disabled>Loading studios...</option>);
         }else{
@@ -14,19 +20,32 @@ function AddAnime(props) {
             });
         }
     };
+
+    const submitForm = (e) => {
+        e.preventDefault();
+        props.addAnimeMutation({
+            variables:{
+                name:formData.name,
+                genre:formData.genre,
+                studioId:formData.studioId,
+            },
+            refetchQueries: [{query:getAnimesQuery}]
+        });
+    };
+
     return (
-        <form id="add-book">
+        <form id="add-anime" onSubmit={submitForm}>
             <div className="field">
                 <label>Anime name:</label>
-                <input type="text"/>
+                <input type="text" onChange={ (e) => setFormData({...formData, name:e.target.value})}/>
             </div>
             <div className="field">
                 <label>Genre:</label>
-                <input type="text"/>
+                <input type="text" onChange={ (e) => setFormData({...formData, genre:e.target.value})}/>
             </div>
             <div className="field">
                 <label>Studio:</label>
-                <select>
+                <select onChange={ (e) => setFormData({...formData, studioId:e.target.value})}>
                     <option>Select studio</option>
                     {displayStudios()}
                 </select>
@@ -37,4 +56,7 @@ function AddAnime(props) {
     );
 }
 
-export default graphql(getStudiosQuery)(AddAnime);
+export default compose(
+    graphql(getStudiosQuery, {name: "getStudiosQuery"}),
+    graphql(addAnimeMutation, {name:"addAnimeMutation"})
+)(AddAnime);

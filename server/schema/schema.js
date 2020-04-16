@@ -17,7 +17,6 @@ const {
 //define first object type which contain different fields
 const AnimeType = new GraphQLObjectType({
    name:'Anime',
-    // needs to be a function so it can be run later on
    fields:() => ({
        id: {type: GraphQLID},
        name: {type: GraphQLString},
@@ -60,7 +59,7 @@ const RootQuery = new GraphQLObjectType({
            resolve(parent,args){
                //code to get data from db/other source
                //  return _.find(animes, {id: args.id});
-               return Anime.findbyId(args.id);
+               return Anime.findById(args.id);
            }
        },
        studio:{
@@ -68,7 +67,7 @@ const RootQuery = new GraphQLObjectType({
            args: {id: {type: GraphQLID}},
             resolve(parent, args){
                // return _.find(studios, {id: args.id})
-                return Studio.findbyId(args.id);
+                return Studio.findById(args.id);
            }
        },
        // lists all animes or studios
