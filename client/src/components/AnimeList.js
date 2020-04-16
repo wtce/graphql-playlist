@@ -1,16 +1,7 @@
 import React from 'react';
-import { gql } from 'apollo-boost';
-import { graphql } from 'react-apollo';
+import {graphql} from 'react-apollo';
+import {getAnimesQuery} from "../queries/queries";
 
-const getAnimesQuery = gql`
-    {
-        animes{
-            name
-            genre
-            id
-        }    
-    }
-`;
 
 function AnimeList(props) {
     const displayAnimes = () => {
@@ -20,7 +11,7 @@ function AnimeList(props) {
         }else {
             return data.animes.map(anime => {
                 return (
-                    <li>{anime.name}</li>
+                    <li key={anime.id}>{anime.name}</li>
                 )
             })
         }

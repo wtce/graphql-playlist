@@ -4,6 +4,7 @@ import {ApolloProvider} from 'react-apollo';
 
 //components
 import AnimeList from "./components/AnimeList";
+import AddAnime from "./components/AddAnime";
 
 // apollo client setup
 const client = new ApolloClient({
@@ -16,6 +17,7 @@ function App() {
             <div id="main">
                 <h1>Emily's Anime List</h1>
                 <AnimeList/>
+                <AddAnime/>
             </div>
         </ApolloProvider>
     );
