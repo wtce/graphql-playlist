@@ -11,7 +11,7 @@ const displayAnimeDetails = () =>{
                 <h2>{anime.name}</h2>
                 <p>Genre: {anime.genre}</p>
                 <p>Studio: {anime.studio.name}</p>
-                <p>All animes by this studio</p>
+                <p>All animes by this studio:</p>
                 <ul className="other-animes">
                     {anime.studio.animes.map(item => {
                         return <li key={item.id}>{item.name}</li>
