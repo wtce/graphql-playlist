@@ -25,6 +25,7 @@ code {
 }
 
 #anime-list li{
+  font-size: 20px;
   display: inline-block;
   margin: 12px;
   padding: 10px;
@@ -45,6 +46,7 @@ form{
 }
 
 form .field{
+  font-size: 20px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 10px;
@@ -75,6 +77,7 @@ form button{
 }
 
 #anime-details{
+  font-size: 20px;
   position: fixed;
   top: 0;
   right: 0;
