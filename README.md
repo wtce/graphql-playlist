@@ -11,6 +11,32 @@ This application shows a list of animes and its respective information (studio, 
  * [Mongoose](https://mongoosejs.com/) is used the ORM that creates schemas for MongoDB
  * [Express](https://expressjs.com/) is used as a simple framework to set up the server
  * [GraphQL Server](https://graphql.org/) is the query language used to create queries to the database
+ 
  ## Client
  
  The front-end is written in React and uses [Apollo](https://www.apollographql.com/) to translate GraphQL queries from the front-end to the server.
+ 
+ # How to Start the Application
+ Clone the repo and navigate inside. 
+ ```$xslt
+// Navigate to the server directory
+$ cd server/
+
+// Install dependencies
+$ npm i
+
+// Start the server
+$ nodemon app
+```
+
+To start the client, open up another terminal.
+```
+// Navigate to client directory
+$ cd ../client/
+
+// Install dependencies
+$ npm i
+
+// Start the client
+$ npm start
+```
