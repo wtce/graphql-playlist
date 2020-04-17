@@ -25,9 +25,14 @@ $ cd server/
 // Install dependencies
 $ npm i
 
+// Export your MongoDB connection string
+$ export MONGO_CONNECTION="<connection string>"
+
 // Start the server
 $ nodemon app
 ```
+
+To use graphiql IDE, go to http://localhost:4000/graphql
 
 To start the client, open up another terminal.
 ```
