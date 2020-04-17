@@ -25,7 +25,6 @@ const AnimeType = new GraphQLObjectType({
        studio: {
            type: StudioType,
            resolve(parent, args){
-               console.log(parent);
                // return _.find(studios, {id: parent.studioId});
                return Studio.findById(parent.studioId);
            }
