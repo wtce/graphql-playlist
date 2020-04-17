@@ -1,5 +1,6 @@
 import {gql} from 'apollo-boost';
 
+//defines graphql queries for frontend
 const getAnimesQuery = gql`
     {
         animes{

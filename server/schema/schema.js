@@ -14,7 +14,7 @@ const {
     GraphQLNonNull,
     } = graphql;
 
-//define first object type which contain different fields
+//define an anime which contains different fields
 const AnimeType = new GraphQLObjectType({
    name:'Anime',
    fields:() => ({
@@ -33,6 +33,7 @@ const AnimeType = new GraphQLObjectType({
    })
 });
 
+//defines a studio and relationship to anime
 const StudioType = new GraphQLObjectType({
     name:'Studio',
     fields:() => ({

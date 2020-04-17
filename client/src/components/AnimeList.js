@@ -3,7 +3,7 @@ import {graphql} from 'react-apollo';
 import {getAnimesQuery} from "../queries/queries";
 import AnimeDetails from "./AnimeDetails";
 
-
+//render a list of animes.
 function AnimeList(props) {
     const [selected, setSelected] = React.useState(null);
     const displayAnimes = () => {
@@ -13,6 +13,7 @@ function AnimeList(props) {
         }else {
             return data.animes.map(anime => {
                 return (
+                    //depending on which anime is clicked, set it
                     <li key={anime.id} onClick={(e)=>{setSelected( anime.id)}}>{anime.name}</li>
                 )
             })

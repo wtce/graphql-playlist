@@ -4,12 +4,13 @@ import {getStudiosQuery, addAnimeMutation, getAnimesQuery} from "../queries/quer
 
 
 function AddAnime(props) {
+    //sets empty state for form
     const [formData, setFormData] = React.useState({
         name:'',
         genre:'',
         studioId:''
     });
-
+    //gets list of studios on form
     const displayStudios = () => {
         const data = props.getStudiosQuery;
         if(data.loading){
@@ -21,6 +22,7 @@ function AddAnime(props) {
         }
     };
 
+    //once you click submit button, adds to db
     const submitForm = (e) => {
         e.preventDefault();
         props.addAnimeMutation({
@@ -56,6 +58,7 @@ function AddAnime(props) {
     );
 }
 
+//giving functions ability to be called upon
 export default compose(
     graphql(getStudiosQuery, {name: "getStudiosQuery"}),
     graphql(addAnimeMutation, {name:"addAnimeMutation"})
