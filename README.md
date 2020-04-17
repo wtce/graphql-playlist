@@ -45,3 +45,4 @@ $ npm i
 // Start the client
 $ npm start
 ```
+To start the client, go to http://localhost:3000/
